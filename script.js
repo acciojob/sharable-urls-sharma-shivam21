@@ -1,28 +1,17 @@
 // your code here
 / Select elements
-        const form = document.getElementById("myForm");
-        const urlElement = document.getElementById("url");
+         document.getElementById('button').addEventListener('click', function() {
+      let baseUrl = 'https://localhost:8080/';
+      let name = document.getElementById('name').value.trim();
+      let year = document.getElementById('year').value.trim();
 
-        form.addEventListener("submit", function(event) {
-            event.preventDefault(); // prevent page reload
+      let params = [];
 
-            const name = document.getElementById("name").value;
-            const year = document.getElementById("year").value;
+      if (name) params.push(name=${encodeURIComponent(name)});
+      if (year) params.push(year=${encodeURIComponent(year)});
 
-            let newUrl = "https://localhost:8080/";
+      let queryString = params.length > 0 ? '?' + params.join('&') : '';
 
-            let params = [];
-            if (name !== "") {
-                params.push(name=${encodeURIComponent(name)});
-            }
-            if (year !== "") {
-                params.push(year=${encodeURIComponent(year)});
-            }
-
-            if (params.length > 0) {
-                newUrl += "?" + params.join("&");
-            }
-
-            urlElement.innerText = newUrl;
-        });
+      document.getElementById('url').innerText = baseUrl + queryString;
+    });
 
